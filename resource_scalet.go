@@ -7,6 +7,8 @@ import (
 	"github.com/hashicorp/terraform/helper/schema"
 	"github.com/pkg/errors"
 	vscale "github.com/vozerov/go-vscale"
+
+	"time"
 )
 
 func resourceScalet() *schema.Resource {
@@ -93,6 +95,8 @@ func resourceScaletCreate(d *schema.ResourceData, m interface{}) error {
 	if err != nil {
 		return errors.Wrap(err, "creating scalet failed")
 	}
+
+    time.Sleep(15 * time.Second)
 
 	publicAddress, err := findPublicAddress(client, scalet.CTID)
 	if err != nil {
